@@ -20,10 +20,11 @@ export const Large = Template.bind({});
 (Large as any).args = {
   suit: CardSuit.spades, 
   value: CardValue.ace,
+  open: true,
   style: {
     width: 380,
     height: 560,
-    backgroundColor: '#008800',
+    backgroundColor: '#444444',
     padding: 10
   }
 };
@@ -33,10 +34,11 @@ export const Small = Template.bind({});
 (Small as any).args = {
   suit: CardSuit.spades, 
   value: CardValue.ace,
+  open: true,
   style: {
     width: 200,
     height: 290,
-    backgroundColor: '#008800',
+    backgroundColor: '#444444',
     padding: 10
   }
 };

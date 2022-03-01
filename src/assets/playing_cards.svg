@@ -28912,4 +28912,38 @@
     </g>
   </g>
   </symbol>
+  <symbol id="face-down" viewBox="30 2310 360 540">
+  <g
+     transform="translate(30,1797.6378)"
+     id="face-down">
+    <rect
+       rx="29.944447"
+       ry="29.944447"
+       y="512.86218"
+       x="0.5"
+       height="539"
+       width="359"
+       id="rect6472-45"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.99999976" />
+    <rect
+       rx="19.944447"
+       ry="19.944447"
+       y="532.86218"
+       x="20.5"
+       height="499"
+       width="319"
+       id="rect6472-45"
+       style="fill:none; stroke:#000088; stroke-width:5" />
+    <rect
+       rx="9.944447"
+       ry="9.944447"
+       y="552.86218"
+       x="40.5"
+       height="459"
+       width="279"
+       id="rect6472-45"
+       style="fill:none; stroke:#000088; stroke-width:5" />
+  </g>
+  </symbol>
+
 </svg>

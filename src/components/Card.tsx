@@ -1,4 +1,3 @@
-import React from 'react';
 import playingCards from '../assets/playing_cards.svg';
 import './Card.css';
 
@@ -25,14 +24,21 @@ export enum CardValue {
   king='King'
 }
 
-
-export interface CardProperties {
+export interface CardData {
   suit: CardSuit;
   value: CardValue;
+  faceUp: boolean;
+
 }
 
-export function Card({suit, value}: CardProperties) {
-  return <svg className="card-component">
-    <use xlinkHref={`${playingCards}#${value.toLowerCase()}-${suit.toLowerCase()}`}></use>
+export interface CardProperties extends React.SVGProps<SVGSVGElement>, CardData {}
+
+export function Card({suit, value, faceUp, ...props}: CardProperties) {
+  const cardId = faceUp
+    ? `${playingCards}#${value.toLowerCase()}-${suit.toLowerCase()}`
+    : `${playingCards}#face-down`;
+  const classNames = `${props.className} card-component`;
+  return <svg {...props} className={classNames} >
+    <use xlinkHref={cardId}></use>
   </svg>
 }
