@@ -46,3 +46,79 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Fifty Solitaires: Updating the Project
+
+It has been well over a year since I last posted about this project. I have been busy with other projects and had to leave this one on the back burner.
+A lot has changed since then and the first thing that I now need to do is upgrade all the project's dependencies to their latest versions. This might not 
+be very interesting from a software development perspective, but it is a necessary step to ensure that the project is up to date. So, this post will be 
+all about upgrading dependencies, making adjustments to the configuration and fixing any issues that might arise. As a little taster, I can already tell 
+you that the upgrade of Storybook was the most challenging part of this process. But more on that later.
+
+### Attempting to run the last version of the project
+
+Before I started upgrading dependencies, I wanted to make sure that the project still worked as expected. So, I cloned the repository and ran the following
+commands.
+
+```bash
+npm install
+```
+
+Right away, I got error messages from `node-gyp.js` when it was trying to build the binaries of `node-sass`. I have seen this error before and it is usually
+caused by the fact that the version of `node-sass` is not compatible with the version of Node.js that I am using. So, I checked that I currently have Node.js
+version **20.5.1** installed and then I checked the `node-sass` [documentation](https://www.npmjs.com/package/node-sass) to see that I need version **9.0.0** of node-sass. So, I updated the `package.json` file to use the current latest version.
+
+```json
+"node-sass": "^9.0.0",
+```
+
+Remember that I had already created some components and stories for Storybook, but I had not yet implemented the main application. So, I ran Storybook to see
+if the components would still show up as expected.
+
+```bash
+npm run storybook
+```
+
+Storybook uses Webpack 4 to bundle the project. This emitted the following error message
+
+```bash
+Error: error:0308010C:digital envelope routines::unsupported
+```
+
+Again, this is a compatibility problem with Node. On StackOverflow, I found a [solution](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported) that suggested to tell Node.js to enable the legacy openssl provider. This can be done
+by setting an environment variable.
+
+```bash 
+export NODE_OPTIONS=--openssl-legacy-provider
+npm run storybook
+```
+
+This time, Storybook started up and I could see the project in the browser. At this point, I am hoping this environment variable will be needed once 
+I have upgraded all the dependencies. But for now, I will leave it in place.
+
+### Upgrading dependencies
+
+Now that I can see the `Card` and `Pile` components in Storybook, I will start upgrading the dependencies. 
+
+Remove all entries in `dependencies` from the `package.json` file.
+
+```json
+"dependencies": {},
+```
+
+```bash
+rm -rf node_modules package-lock.json 
+npm install @testing-library/jest-dom @testing-library/react @testing-library/user-event @types/jest @types/node @types/react @types/react-dom react node-sass react-dom react-scripts typescript web-vitals
+```
+
+```bash
+npm start
+```
+
+```bash
+npx storybook@latest upgrade
+```
+
+```bash
+? Do you want to run the 'new-frameworks' migration on your project? › (Y/n)
+```
